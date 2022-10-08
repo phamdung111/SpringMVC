@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="securityLogin.mapper.UserMapper">
+    <resultMap id = "user" type = "securityLogin.entity.UserResponse">
+        <result property = "userId" column = "user.id"/>
+        <result property = "password" column = "user.userPass"/>
+        <result property = "name" column = "user.userName"/>
+        <result property = "email" column = "user.email"/>
+        <result property = "address" column = "user.address"/>
+        <result property = "phoneNumber" column = "user.phoneNumber"/>
+        <result property = "role" column = "role.rollName"/>
+    </resultMap>
+    <!-- findAll -->
+    <select id="userDetails" resultMap="user"
+            parameterType="securityLogin.entity.UserRequest">
+        select distinct user.id, user.userName, user.userPass, user.email,
+        user.address,user.phoneNumber, role.rollName from user inner
+        join (role inner join user_role on role.rollId = user_role.roleId) on user.userName= #{user};
+    </select>
+</mapper>

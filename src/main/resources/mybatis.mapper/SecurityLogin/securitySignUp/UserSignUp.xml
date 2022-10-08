@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="signup.mapper.UserSignUpMapper">
+    <select id="emailExits" resultType="String"
+            parameterType="String">
+        select user.userName from user where user.email = #{String};
+    </select>
+    <insert id="addUserSignUp" parameterType="signup.entity.UserSignInRequest">
+        INSERT INTO `springmvc`.`user`
+        (`userName`, `userPass`, `fullName`, `email`, `address`, `phoneNumber`)
+        VALUES(#{userName},#{userPass},#{fullName},#{email},#{address},#{phoneNumber});
+    </insert>
+</mapper>
